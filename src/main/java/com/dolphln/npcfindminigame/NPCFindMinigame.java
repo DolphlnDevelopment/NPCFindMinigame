@@ -1,5 +1,7 @@
 package com.dolphln.npcfindminigame;
 
+import co.aikar.commands.PaperCommandManager;
+import com.dolphln.npcfindminigame.commands.NPCMinigameCommand;
 import com.dolphln.npcfindminigame.core.NPCManager;
 import com.dolphln.npcfindminigame.files.ConfigFile;
 import com.dolphln.npcfindminigame.files.DataFile;
@@ -8,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class NPCFindMinigame extends JavaPlugin {
 
     private static NPCFindMinigame instance;
+    private PaperCommandManager commandManager;
 
     private ConfigFile configFile;
     private DataFile dataFile;
@@ -22,6 +25,8 @@ public final class NPCFindMinigame extends JavaPlugin {
         this.dataFile = new DataFile(this);
 
         this.npcManager = new NPCManager(this);
+
+        this.commandManager.registerCommand(new NPCMinigameCommand(this));
     }
 
     @Override
