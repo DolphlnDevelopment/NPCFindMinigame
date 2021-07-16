@@ -7,8 +7,8 @@ plugins {
 group = 'NPCFindMinigame'
 version = '1.0-SNAPSHOT'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = '1.16'
+targetCompatibility = '1.16'
 
 repositories {
     mavenCentral()
@@ -20,13 +20,32 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+    maven {
+        name = 'aikar'
+        url = 'https://repo.aikar.co/content/groups/aikar/'
+    }
+    maven {
+        name = 'jitpack.io'
+        url = 'https://jitpack.io'
+    }
+    maven {
+        name = 'minebench-repo'
+        url = 'https://repo.minebench.de/'
+    }
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+    compileOnly(group: 'com.github.juliarn', name: 'npc-lib', version: '2.5-RELEASE')
+
+    compileOnly files('libs/spigot-1.17.1.jar')
+
+    implementation 'co.aikar:acf-paper:0.5.0-SNAPSHOT'
+    implementation 'de.themoep:minedown:1.7.1-SNAPSHOT'
 }
 
 processResources {
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
     from(sourceSets.main.resources.srcDirs) {
         filter ReplaceTokens, tokens: [version: version]
     }
