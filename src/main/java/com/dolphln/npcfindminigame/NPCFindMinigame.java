@@ -1,17 +1,47 @@
 package com.dolphln.npcfindminigame;
 
+import com.dolphln.npcfindminigame.core.NPCManager;
+import com.dolphln.npcfindminigame.files.ConfigFile;
+import com.dolphln.npcfindminigame.files.DataFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class NPCFindMinigame extends JavaPlugin {
 
+    private static NPCFindMinigame instance;
+
+    private ConfigFile configFile;
+    private DataFile dataFile;
+
+    private NPCManager npcManager;
+
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        instance = this;
 
+        this.configFile = new ConfigFile(this);
+        this.dataFile = new DataFile(this);
+
+        this.npcManager = new NPCManager(this);
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        this.dataFile.save();
+    }
+
+    public static NPCFindMinigame getInstance() {
+        return instance;
+    }
+
+    public ConfigFile getConfigFile() {
+        return configFile;
+    }
+
+    public DataFile getDataFile() {
+        return dataFile;
+    }
+
+    public NPCManager getNpcManager() {
+        return npcManager;
     }
 }
