@@ -5,7 +5,11 @@ import com.dolphln.npcfindminigame.commands.NPCMinigameCommand;
 import com.dolphln.npcfindminigame.core.NPCManager;
 import com.dolphln.npcfindminigame.files.ConfigFile;
 import com.dolphln.npcfindminigame.files.DataFile;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.List;
 
 public final class NPCFindMinigame extends JavaPlugin {
 
@@ -32,6 +36,10 @@ public final class NPCFindMinigame extends JavaPlugin {
     @Override
     public void onDisable() {
         this.dataFile.save();
+    }
+
+    public void runCommands(List<String> commands, Player player) {
+        commands.forEach(cmd -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd.replace("%player%", player.getDisplayName())));
     }
 
     public static NPCFindMinigame getInstance() {
