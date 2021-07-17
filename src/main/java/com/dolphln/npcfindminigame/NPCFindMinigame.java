@@ -30,6 +30,7 @@ public final class NPCFindMinigame extends JavaPlugin {
 
         this.npcManager = new NPCManager(this);
 
+        this.commandManager = new PaperCommandManager(this);
         this.commandManager.registerCommand(new NPCMinigameCommand(this));
     }
 
