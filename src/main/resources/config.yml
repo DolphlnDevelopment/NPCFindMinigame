@@ -19,7 +19,7 @@ message:
   npc_start_title:
     title: "&a&lNPC HIDDEN"
     subtitle: "&aMinigame started"
-  npc_hint: "&aThe NPC hided in the biome %biome%"
+  npc_hint: "&aThe NPC %name% hid in the biome %biome%"
   winner_title:
     title: "&7Congratulations"
     subtitle: "&8You won!"
