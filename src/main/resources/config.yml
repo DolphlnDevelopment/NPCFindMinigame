@@ -13,3 +13,14 @@ npcs:
     name: "npc2"
     texture: "ewogICJ0aW1lc3RhbXAiIDogMTYyNjQ3ODAzNDc0MiwKICAicHJvZmlsZUlkIiA6ICIwNWJhN2FmOGY0M2M0NGFjYWJkZjkzZjVmMTk2Njg3NiIsCiAgInByb2ZpbGVOYW1lIiA6ICJESkdyb3VuZDAiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZThhOWMwZThiNjU5MWY3MWVlYzczMWEyZDdkODJlY2I0NmMwYjRmYzg4Y2IxNGIxOTE1Yjc2YTNhOTUwZjk2OCIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
     signature: "bQtD+sRNP60ODWF0A4jaaLtTGk2DC7pCHNX6mWADV9PB5S4yHCxkYt41gPX44ZQyZSVFLlyHYGeBBp9skRBK5EWKrlSe+jJ2EUbKmV5JkbOeoaDvi6HJ/w/gBLVkvD9t6egNJeHxQ7nMRluGCCK4Gd90dfXLCEyOjcQziTDJknKyP8aWJfdvdupXLAr3ih7G9o+oSCqp2tTYbu1IJjzui/CjctXS8mAEnPcWatmP5Of19GwPvoWsFdAeVcxkMSkrKll5R+vP9UKqyzRFD91LViApmo0qmjSWXqIcCzzHYsG5dr1JPAtdltkXrLC/TdOwY2cs+Had/qrt5uLTxCIBV2sD0w0C92zqqbsrSyQOVg0U+cMrJRf03hnESXPKR5SMFlv/k3yC7R1bDGqiiUwhdUNRHi+wh53LBNvqJv3/GIBrZUjZPgmC8YjdApINi4MkUe4mOesfjx+16JNjcqbvwetrYAp5tAbVr1fFx2cFtS6QdmBL498Mj+cuxIK7Bu80rrtOJdY6VBlKYFERb+FiPEhPiCbKEYP4jkHOISGO7WD76T336xvHXVr/Y7PMbD11d1RX3mYVTpe79FpWGqY1Og/cukns+aYlCQ2z77b+hh7xAkd7AWNRfXFXwEGU1kj1x7W27Qe/nKLIFHmUcfu96eIK7V/IgZkSzTsM6zmuXlg="
+
+message:
+  npc_start_countdown: "&7Starting in: &b%time%s"
+  npc_start_title:
+    title: "&a&lNPC HIDDEN"
+    subtitle: "&aMinigame started"
+  npc_hint: "&aThe NPC hided in the biome %biome%"
+  winner_title:
+    title: "&7Congratulations"
+    subtitle: "&8You won!"
+  winner_message: "&7The user %player% won the minigame. Thank you for playing :D"
