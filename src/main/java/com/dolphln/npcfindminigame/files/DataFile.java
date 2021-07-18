@@ -1,6 +1,8 @@
 package com.dolphln.npcfindminigame.files;
 
 import com.dolphln.npcfindminigame.NPCFindMinigame;
+import com.dolphln.npcfindminigame.models.BasicCuboid;
+import com.dolphln.npcfindminigame.models.BasicLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -21,6 +23,8 @@ public class DataFile {
 
     private YamlConfiguration dataCFG;
     private File dataFile;
+
+    private BasicCuboid hubCuboid;
 
     public DataFile(NPCFindMinigame plugin) {
         this.plugin = plugin;
@@ -46,6 +50,10 @@ public class DataFile {
         dataCFG = YamlConfiguration.loadConfiguration(dataFile);
 
         plugin.getLogger().log(Level.FINE, "File data.yml loaded correctly.");
+
+        BasicLocation pos1 = getLocation("hub.pos1");
+        BasicLocation pos2 = getLocation("hub.pos2");
+        this.hubCuboid = new BasicCuboid(pos1, pos2, pos1.getWorldName());
     }
 
     public YamlConfiguration getData() {
@@ -84,11 +92,15 @@ public class DataFile {
         this.getData().set(path + ".world", loc.getWorld().getName());
     }
 
-    public Location getLocation(String path) {
+    public BasicLocation getLocation(String path) {
         int x = this.getData().getInt(path + ".x");
         int y = this.getData().getInt(path + ".y");
         int z = this.getData().getInt(path + ".z");
         String world = this.getData().getString(path + ".world");
-        return new Location(Bukkit.getWorld(world), x, y, z);
+        return new BasicLocation(x, y, z, world);
+    }
+
+    public BasicCuboid getHubCuboid() {
+        return hubCuboid;
     }
 }
