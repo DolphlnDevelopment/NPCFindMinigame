@@ -64,6 +64,18 @@ public class BasicCuboid {
         return new Location(getWorld(), this.maxX, this.maxY, this.maxZ);
     }
 
+    public void setPoint1(int x, int y, int z) {
+        this.minX = x;
+        this.minY = y;
+        this.minZ = z;
+    }
+
+    public void setPoint2(int x, int y, int z) {
+        this.maxX = x;
+        this.maxY = y;
+        this.maxZ = z;
+    }
+
     public int getTotalBlockSize() {
         return this.getHeight() * this.getXWidth() * this.getZWidth();
     }
