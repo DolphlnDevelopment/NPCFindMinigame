@@ -18,6 +18,10 @@ countdown: 15
 max_time_to_find_npc: 360
 level_of_speed: 2
 
+random_settings:
+  y_level: 70
+  radius: 10
+
 winner_commands:
   - "/say %player% won. You can change this on the config."
 
