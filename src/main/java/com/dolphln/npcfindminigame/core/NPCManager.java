@@ -8,6 +8,9 @@ import com.github.juliarn.npc.NPCPool;
 import com.github.juliarn.npc.event.PlayerNPCInteractEvent;
 import com.github.juliarn.npc.modifier.AnimationModifier;
 import com.github.juliarn.npc.profile.Profile;
+import de.themoep.minedown.MineDown;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -15,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +28,8 @@ public class NPCManager implements Listener {
     private final NPCFindMinigame plugin;
 
     private boolean running;
+    private BukkitTask gameTask;
+    private Integer time;
 
     private NPCPool npcPool;
     private NPC playingNPC;
@@ -43,11 +49,23 @@ public class NPCManager implements Listener {
         if (this.running) return;
         this.running = true;
 
-        // TODO: Countdown
-
+        // Location
         // TODO: Generate Random Location
 
-        this.startMinigame(null);
+        this.time = 15;
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (time == 0) {
+                    startMinigame(null);
+                    cancel();
+                }
+                BaseComponent[] message = MineDown.parse(plugin.getConfigFile().getConfig().getString("message.npc_start_countdown").replaceAll("%time%", String.valueOf(time)));
+                Bukkit.getOnlinePlayers().forEach(player -> player.spigot().sendMessage(ChatMessageType.ACTION_BAR, message));
+                time--;
+            }
+        }.runTaskTimerAsynchronously(plugin, 0L, 20L);
+
     }
 
     public void startMinigame(final Location loc) {
