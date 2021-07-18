@@ -1,5 +1,6 @@
 package com.dolphln.npcfindminigame.models;
 
+import com.dolphln.npcfindminigame.utils.RandomUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -105,6 +106,14 @@ public class BasicCuboid {
                 x >= minX && x <= maxX &&
                 y >= minY && y <= maxY &&
                 z >= minZ && z <= maxZ;
+    }
+
+    public BasicLocation getRandomLocation() {
+        int x = RandomUtils.generateRandomNumber(this.minX, this.maxX);
+        int y = RandomUtils.generateRandomNumber(this.minY, this.maxY);
+        int z = RandomUtils.generateRandomNumber(this.minZ, this.maxZ);
+
+        return new BasicLocation(x, y, z, this.getWorldName());
     }
 
     @Override
