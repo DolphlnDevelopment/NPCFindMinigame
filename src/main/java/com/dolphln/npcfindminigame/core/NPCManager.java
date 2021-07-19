@@ -191,7 +191,7 @@ public class NPCManager implements Listener {
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.title")),
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.subtitle")),
                 0, 4, 1);
-        Bukkit.broadcastMessage(plugin.getConfigFile().getConfig().getString("winner_message").replaceAll("%player%", player.getDisplayName()));
+        Bukkit.broadcastMessage(plugin.getConfigFile().getConfig().getString("message.winner_message").replaceAll("%player%", player.getDisplayName()));
         plugin.runCommands(plugin.getConfigFile().getConfig().getStringList("winner_commands"), player);
     }
 
