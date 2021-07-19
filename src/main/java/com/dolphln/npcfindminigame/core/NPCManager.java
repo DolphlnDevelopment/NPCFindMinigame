@@ -176,6 +176,7 @@ public class NPCManager implements Listener {
         NPC npc = e.getNPC();
 
         if (this.playingNPC == null || this.playingNPC != npc) return;
+        this.gameTask.cancel();
 
         npc.animation().queue(AnimationModifier.EntityAnimation.TAKE_DAMAGE);
         FireworkUtils.spawnFireworks(npc.getLocation(), 1);
