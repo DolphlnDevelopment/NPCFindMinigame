@@ -40,7 +40,7 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
-    compileOnly group: 'com.github.juliarn', name: 'npc-lib', version: '2.6-RELEASE'
+    implementation group: 'com.github.juliarn', name: 'npc-lib', version: '2.5-RELEASE'
 
     implementation 'co.aikar:acf-paper:0.5.0-SNAPSHOT'
     implementation 'de.themoep:minedown:1.7.1-SNAPSHOT'
@@ -58,6 +58,7 @@ shadowJar {
     relocate 'co.aikar.commands', 'com.dolphln.acf'
     relocate 'co.aikar.locales', 'com.dolphln.locales'
     relocate 'de.themoep.minedown', 'com.dolphln.minedown'
+    relocate 'com.github.juliarn.npc', 'com.dolphln.npc'
 }
 
 build.dependsOn shadowJar
