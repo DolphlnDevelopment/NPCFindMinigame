@@ -197,6 +197,10 @@ public class NPCManager implements Listener {
         plugin.runCommands(plugin.getConfigFile().getConfig().getStringList("winner_commands"), player);
     }
 
+    public String getNPCName() {
+        return this.didItStart() ? this.playingNPC.getProfile().getName() : "";
+    }
+
     public boolean isRunning() {
         return running;
     }

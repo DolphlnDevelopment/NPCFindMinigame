@@ -5,6 +5,8 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.Locale;
+
 /**
  * This class will be registered through the register-method in the
  * plugins onEnable-method.
@@ -105,9 +107,34 @@ public class Placeholders extends PlaceholderExpansion {
             return "";
         }
 
-        // TODO: Create placeholder for the name of the NPC
-        // TODO: Create placeholder for the points a user has (Maybe database)
+        if (identifier.toLowerCase().startsWith("top_name_")) {
+            Integer top = null;
+            try {
+                top = Integer.parseInt(identifier.toLowerCase().replaceAll("top_name_", ""));
+            } catch (Exception e) {
+                return "";
+            }
 
-        return null;
+            if (top > 10 || top < 1) return "";
+
+            return plugin.getDatabase().getTopWins().get(top-1).playerName();
+        } else if (identifier.toLowerCase().startsWith("top_wins_")) {
+            Integer top = null;
+            try {
+                top = Integer.parseInt(identifier.toLowerCase().replaceAll("top_wins_", ""));
+            } catch (Exception e) {
+                return "";
+            }
+
+            if (top > 10 || top < 1) return "";
+
+            return String.valueOf(plugin.getDatabase().getTopWins().get(top-1).wins());
+        } else if (identifier.equalsIgnoreCase("wins")) {
+            return String.valueOf(plugin.getDatabase().getPlayer(player.getUniqueId()).wins());
+        } else if (identifier.equalsIgnoreCase("name")) {
+            return plugin.getNpcManager().getNPCName();
+        } else {
+            return "";
+        }
     }
 }
