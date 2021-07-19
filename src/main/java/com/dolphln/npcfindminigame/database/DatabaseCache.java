@@ -19,14 +19,14 @@ public class DatabaseCache {
         this.plugin = plugin;
 
         this.databasePlayersCache = new HashMap<>();
-        this.topPlayersCache = plugin.getDatabase().getTopWins();;
+        this.topPlayersCache = new ArrayList<>();
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 topPlayersCache = plugin.getDatabase().getTopWins(10);
             }
-        }.runTaskTimerAsynchronously(plugin, 60*20L, 30*20L);
+        }.runTaskTimerAsynchronously(plugin, 15*20L, 30*20L);
     }
 
     public void addPlayerCache(PlayerDatabaseResult playerDatabaseResult) {
