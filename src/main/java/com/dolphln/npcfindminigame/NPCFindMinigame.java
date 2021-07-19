@@ -3,6 +3,7 @@ package com.dolphln.npcfindminigame;
 import co.aikar.commands.PaperCommandManager;
 import com.dolphln.npcfindminigame.commands.NPCMinigameCommand;
 import com.dolphln.npcfindminigame.core.NPCManager;
+import com.dolphln.npcfindminigame.database.Database;
 import com.dolphln.npcfindminigame.files.ConfigFile;
 import com.dolphln.npcfindminigame.files.DataFile;
 import com.dolphln.npcfindminigame.listener.JoinLeaveListener;
@@ -20,6 +21,8 @@ public final class NPCFindMinigame extends JavaPlugin {
     private ConfigFile configFile;
     private DataFile dataFile;
 
+    private Database database;
+
     private NPCManager npcManager;
 
     @Override
@@ -28,6 +31,8 @@ public final class NPCFindMinigame extends JavaPlugin {
 
         this.configFile = new ConfigFile(this);
         this.dataFile = new DataFile(this);
+
+        this.database = new Database(this);
 
         this.npcManager = new NPCManager(this);
 
@@ -56,6 +61,10 @@ public final class NPCFindMinigame extends JavaPlugin {
 
     public DataFile getDataFile() {
         return dataFile;
+    }
+
+    public Database getDatabase() {
+        return database;
     }
 
     public NPCManager getNpcManager() {
