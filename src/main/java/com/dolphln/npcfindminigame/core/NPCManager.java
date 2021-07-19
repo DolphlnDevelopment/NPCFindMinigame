@@ -175,7 +175,8 @@ public class NPCManager implements Listener {
         Player player = e.getPlayer();
         NPC npc = e.getNPC();
 
-        if (this.playingNPC == null || this.playingNPC != npc) return;
+        if (!running || this.playingNPC == null || this.playingNPC != npc) return;
+        running = false;
         this.gameTask.cancel();
 
         npc.animation().queue(AnimationModifier.EntityAnimation.TAKE_DAMAGE);
@@ -192,7 +193,7 @@ public class NPCManager implements Listener {
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.title")),
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.subtitle")),
                 0, 4, 1);
-        Bukkit.broadcastMessage(plugin.getConfigFile().getConfig().getString("message.winner_message").replaceAll("%player%", player.getDisplayName()));
+        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_message").replaceAll("%player%", player.getDisplayName())));
         plugin.runCommands(plugin.getConfigFile().getConfig().getStringList("winner_commands"), player);
     }
 
