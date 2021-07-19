@@ -62,7 +62,7 @@ public class NPCManager implements Listener {
 
             for (int y = initialY-radius; y < initialY+radius; y++) {
                 Block block = world.getBlockAt(randomLoc.getX(), y, randomLoc.getZ());
-                if (block.getType() == Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
+                if (block.getType() == Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR && block.getLocation().add(0, -1, 0).getBlock().getType() != Material.AIR) {
                     npcLocation = new BasicLocation(randomLoc.getX(), y, randomLoc.getZ(), randomLoc.getWorldName());
                     break;
                 }
