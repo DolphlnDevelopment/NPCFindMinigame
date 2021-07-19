@@ -39,7 +39,7 @@ public class Database {
         hikari = new HikariDataSource();
         hikari.setMaximumPoolSize(databaseSection.getInt("pool-size"));
 
-        hikari.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+        hikari.setDataSourceClassName("com.mysql.cj.jdbc.MysqlDataSource");
 
         hikari.addDataSourceProperty("serverName", databaseSection.getString("host"));
         hikari.addDataSourceProperty("port", databaseSection.getInt("port"));
@@ -47,12 +47,6 @@ public class Database {
 
         hikari.addDataSourceProperty("user", databaseSection.getString("username"));
         hikari.addDataSourceProperty("password", databaseSection.getString("password"));
-
-        hikari.addDataSourceProperty("characterEncoding", "utf8");
-        hikari.addDataSourceProperty("useUnicode", "true");
-
-        hikari.addDataSourceProperty("characterEncoding","utf8");
-        hikari.addDataSourceProperty("useUnicode","true");
 
         hikari.validate();
     }
