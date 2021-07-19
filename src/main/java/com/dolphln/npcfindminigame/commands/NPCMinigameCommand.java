@@ -11,7 +11,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("npcminigame")
-@CommandPermission("npcminigame.use")
 public class NPCMinigameCommand extends BaseCommand {
 
     private final NPCFindMinigame plugin;
@@ -27,11 +26,13 @@ public class NPCMinigameCommand extends BaseCommand {
     @Subcommand("help")
     @Default
     @CatchUnknown
+    @CommandPermission("npcminigame.use")
     public void onHelp(CommandSender sender) {
         sender.spigot().sendMessage(this.helpMessage);
     }
 
     @Subcommand("pos1")
+    @CommandPermission("npcminigame.use")
     public void onPos1(CommandSender sender) {
         Player player = playerCheck(sender);
         if (player == null) return;
@@ -46,6 +47,7 @@ public class NPCMinigameCommand extends BaseCommand {
     }
 
     @Subcommand("pos2")
+    @CommandPermission("npcminigame.use")
     public void onPos2(CommandSender sender) {
         Player player = playerCheck(sender);
         if (player == null) return;
@@ -60,6 +62,7 @@ public class NPCMinigameCommand extends BaseCommand {
     }
 
     @Subcommand("start")
+    @CommandPermission("npcminigame.start")
     public void onStart(CommandSender sender) {
         NPCManager.CreateGameResult res = plugin.getNpcManager().createMinigame();
 
