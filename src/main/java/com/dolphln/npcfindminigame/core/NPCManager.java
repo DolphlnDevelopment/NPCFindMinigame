@@ -17,6 +17,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -89,9 +91,14 @@ public class NPCManager implements Listener {
         String npcName = createNPC(loc);
         this.time = plugin.getConfigFile().getConfig().getInt("max_time_to_find_npc");
 
+        int speed_power = plugin.getConfigFile().getConfig().getInt("level_of_speed");
         String title = ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.npc_start_title.title"));
         String subtitle = ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.npc_start_title.subtitle"));
-        Bukkit.getOnlinePlayers().forEach(player -> player.sendTitle(title, subtitle, 1, 5, 1));
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            player.sendTitle(title, subtitle, 1, 5, 1);
+            player.removePotionEffect(PotionEffectType.SPEED);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 9999, speed_power, true, false, false));
+        });
 
         String message = ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.npc_hint")
                 .replaceAll("%name%", npcName)
@@ -150,11 +157,16 @@ public class NPCManager implements Listener {
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.title")),
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.subtitle")),
                 0, 4, 1);
+        Bukkit.getOnlinePlayers().forEach(p -> p.removePotionEffect(PotionEffectType.SPEED));
         Bukkit.broadcastMessage(plugin.getConfigFile().getConfig().getString("winner_message").replaceAll("%player%", player.getDisplayName()));
     }
 
     public boolean isRunning() {
         return running;
+    }
+
+    public boolean didItStart() {
+        return this.playingNPC != null;
     }
 
     enum CreateGameResult {
