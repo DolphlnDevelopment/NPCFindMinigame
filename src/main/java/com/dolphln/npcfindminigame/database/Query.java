@@ -8,7 +8,7 @@ public class Query {
             "CREATE TABLE `players` ( `uuid` TINYTEXT CHARACTER SET utf8 COLLATE utf8_bin NOT NULL, `playerName` TINYTEXT CHARACTER SET utf8 COLLATE utf8_bin NULL , `wins` INT NOT NULL DEFAULT 0 , PRIMARY KEY (`uuid`(36))) ENGINE = InnoDB;",
     };
 
-    static final String addPlayer = "INSERT INTO players(uuid) VALUES (?);";
+    static final String addPlayer = "INSERT INTO players(uuid, playerName) VALUES (?, ?);";
 
     static final String getPlayer = "SELECT * FROM `players` WHERE `uuid` = ?;";
 
