@@ -185,6 +185,13 @@ public class NPCManager implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
+                plugin.getDatabase().addWin(player.getUniqueId());
+            }
+        }.runTaskAsynchronously(plugin);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
                 finishGame();
             }
         }.runTaskLater(plugin, 4L);
