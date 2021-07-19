@@ -179,7 +179,7 @@ public class NPCManager implements Listener {
         running = false;
         this.gameTask.cancel();
 
-        npc.animation().queue(AnimationModifier.EntityAnimation.TAKE_DAMAGE);
+        npc.animation().queue(AnimationModifier.EntityAnimation.TAKE_DAMAGE).send();
         FireworkUtils.spawnFireworks(npc.getLocation(), 1);
 
         new BukkitRunnable() {
