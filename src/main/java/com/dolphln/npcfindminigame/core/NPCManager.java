@@ -2,6 +2,7 @@ package com.dolphln.npcfindminigame.core;
 
 import com.dolphln.npcfindminigame.NPCFindMinigame;
 import com.dolphln.npcfindminigame.files.ConfigNPC;
+import com.dolphln.npcfindminigame.models.BasicLocation;
 import com.dolphln.npcfindminigame.utils.FireworkUtils;
 import com.github.juliarn.npc.NPC;
 import com.github.juliarn.npc.NPCPool;
@@ -11,9 +12,8 @@ import com.github.juliarn.npc.profile.Profile;
 import de.themoep.minedown.MineDown;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -45,12 +45,28 @@ public class NPCManager implements Listener {
         this.playingNPC = null;
     }
 
-    public void createMinigame() {
-        if (this.running) return;
+    public CreateGameResult createMinigame() {
+        if (this.running) return CreateGameResult.GAME_ALREADY_RUNNING;
         this.running = true;
 
-        // Location
-        // TODO: Generate Random Location
+        int radius = plugin.getConfigFile().getConfig().getInt("random_settings.radius");
+        int initialY = plugin.getConfigFile().getConfig().getInt("random_settings.y_level");
+
+        BasicLocation npcLocation = null;
+        for (int i = 0; i < 100 && npcLocation == null; i++) {
+            BasicLocation randomLoc = plugin.getDataFile().getHubCuboid().getRandomLocation();
+            World world = Bukkit.getWorld(randomLoc.getWorldName());
+
+            for (int y = initialY-radius; y < radius*2; y++) {
+                Block block = world.getBlockAt(randomLoc.getX(), y, randomLoc.getZ());
+                if (block.getType() == Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
+                    npcLocation = new BasicLocation(randomLoc.getX(), y, randomLoc.getZ(), randomLoc.getWorldName());
+                    break;
+                }
+            }
+        }
+
+        if (npcLocation == null) return CreateGameResult.CANNOT_GET_LOCATION;
 
         this.time = 15;
         new BukkitRunnable() {
@@ -66,10 +82,12 @@ public class NPCManager implements Listener {
             }
         }.runTaskTimerAsynchronously(plugin, 0L, 20L);
 
+        return CreateGameResult.SUCCESSFUL;
     }
 
     public void startMinigame(final Location loc) {
         String npcName = createNPC(loc);
+        this.time = plugin.getConfigFile().getConfig().getInt("max_time_to_find_npc");
 
         String title = ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.npc_start_title.title"));
         String subtitle = ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.npc_start_title.subtitle"));
@@ -137,5 +155,9 @@ public class NPCManager implements Listener {
 
     public boolean isRunning() {
         return running;
+    }
+
+    enum CreateGameResult {
+        CANNOT_GET_LOCATION(),GAME_ALREADY_RUNNING(),SUCCESSFUL();
     }
 }
