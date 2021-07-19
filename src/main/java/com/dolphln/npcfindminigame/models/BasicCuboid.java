@@ -35,9 +35,9 @@ public class BasicCuboid {
 
     public List<BasicLocation> blockList() {
         final ArrayList<BasicLocation> bL = new ArrayList<>(this.getTotalBlockSize());
-        for(int x = this.minX; x <= this.maxX; ++x) {
-            for(int y = this.minY; y <= this.maxY; ++y) {
-                for(int z = this.minZ; z <= this.maxZ; ++z) {
+        for (int x = this.minX; x <= this.maxX; ++x) {
+            for (int y = this.minY; y <= this.maxY; ++y) {
+                for (int z = this.minZ; z <= this.maxZ; ++z) {
                     bL.add(new BasicLocation(x, y, z, this.worldName));
                 }
             }

@@ -2,10 +2,7 @@ package com.dolphln.npcfindminigame.hooks;
 
 import com.dolphln.npcfindminigame.NPCFindMinigame;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-
-import java.util.Locale;
 
 /**
  * This class will be registered through the register-method in the
@@ -13,17 +10,16 @@ import java.util.Locale;
  */
 public class Placeholders extends PlaceholderExpansion {
 
-    private NPCFindMinigame plugin;
+    private final NPCFindMinigame plugin;
 
     /**
      * Since we register the expansion inside our own plugin, we
      * can simply use this method here to get an instance of our
      * plugin.
      *
-     * @param plugin
-     *        The instance of our plugin.
+     * @param plugin The instance of our plugin.
      */
-    public Placeholders(NPCFindMinigame plugin){
+    public Placeholders(NPCFindMinigame plugin) {
         this.plugin = plugin;
     }
 
@@ -35,7 +31,7 @@ public class Placeholders extends PlaceholderExpansion {
      * @return true to persist through reloads
      */
     @Override
-    public boolean persist(){
+    public boolean persist() {
         return true;
     }
 
@@ -46,7 +42,7 @@ public class Placeholders extends PlaceholderExpansion {
      * @return Always true since it's an internal class.
      */
     @Override
-    public boolean canRegister(){
+    public boolean canRegister() {
         return true;
     }
 
@@ -57,7 +53,7 @@ public class Placeholders extends PlaceholderExpansion {
      * @return The name of the author as a String.
      */
     @Override
-    public String getAuthor(){
+    public String getAuthor() {
         return plugin.getDescription().getAuthors().toString();
     }
 
@@ -71,20 +67,20 @@ public class Placeholders extends PlaceholderExpansion {
      * @return The identifier in {@code %<identifier>_<value>%} as String.
      */
     @Override
-    public String getIdentifier(){
+    public String getIdentifier() {
         return "npcm";
     }
 
     /**
      * This is the version of the expansion.
      * <br>You don't have to use numbers, since it is set as a String.
-     *
+     * <p>
      * For convienience do we return the version from the plugin.yml
      *
      * @return The version as a String.
      */
     @Override
-    public String getVersion(){
+    public String getVersion() {
         return plugin.getDescription().getVersion();
     }
 
@@ -94,15 +90,12 @@ public class Placeholders extends PlaceholderExpansion {
      * <br>We specify the value identifier in this method.
      * <br>Since version 2.9.1 can you use OfflinePlayers in your requests.
      *
-     * @param  player
-     *         A {@link org.bukkit.entity.Player Player}.
-     * @param  identifier
-     *         A String containing the identifier/value.
-     *
+     * @param player     A {@link org.bukkit.entity.Player Player}.
+     * @param identifier A String containing the identifier/value.
      * @return possibly-null String of the requested identifier.
      */
     @Override
-    public String onPlaceholderRequest(Player player, String identifier){
+    public String onPlaceholderRequest(Player player, String identifier) {
         try {
             if (identifier.toLowerCase().startsWith("top_name_")) {
                 Integer top = null;
@@ -114,7 +107,7 @@ public class Placeholders extends PlaceholderExpansion {
 
                 if (top > 10 || top < 1) return "";
 
-                return plugin.getDatabase().getTopWins().get(top-1).playerName();
+                return plugin.getDatabase().getTopWins().get(top - 1).playerName();
             } else if (identifier.toLowerCase().startsWith("top_wins_")) {
                 Integer top = null;
                 try {
@@ -125,7 +118,7 @@ public class Placeholders extends PlaceholderExpansion {
 
                 if (top > 10 || top < 1) return "";
 
-                return String.valueOf(plugin.getDatabase().getTopWins().get(top-1).wins());
+                return String.valueOf(plugin.getDatabase().getTopWins().get(top - 1).wins());
             } else if (identifier.equalsIgnoreCase("wins")) {
                 if (player == null) {
                     return "";

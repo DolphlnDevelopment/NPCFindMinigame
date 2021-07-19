@@ -34,7 +34,7 @@ public class NPCManager implements Listener {
     private BukkitTask gameTask;
     private Integer time;
 
-    private NPCPool npcPool;
+    private final NPCPool npcPool;
     private NPC playingNPC;
 
     public NPCManager(NPCFindMinigame plugin) {
@@ -63,7 +63,7 @@ public class NPCManager implements Listener {
             BasicLocation randomLoc = plugin.getDataFile().getHubCuboid().getRandomLocation();
             World world = Bukkit.getWorld(randomLoc.getWorldName());
 
-            for (int y = initialY-radius; y < initialY+radius; y++) {
+            for (int y = initialY - radius; y < initialY + radius; y++) {
                 Block block = world.getBlockAt(randomLoc.getX(), y, randomLoc.getZ());
                 if (block.getType() == Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR && BlockUtils.isBlockStatic(block.getLocation().add(0, -1, 0).getBlock().getType())) {
                     npcLocation = new BasicLocation(randomLoc.getX(), y, randomLoc.getZ(), randomLoc.getWorldName());
@@ -217,6 +217,6 @@ public class NPCManager implements Listener {
     }
 
     public enum CreateGameResult {
-        CANNOT_GET_LOCATION(),GAME_ALREADY_RUNNING(),SUCCESSFUL();
+        CANNOT_GET_LOCATION(), GAME_ALREADY_RUNNING(), SUCCESSFUL()
     }
 }

@@ -1,9 +1,6 @@
 package com.dolphln.npcfindminigame.files;
 
 import com.dolphln.npcfindminigame.NPCFindMinigame;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -17,7 +14,7 @@ public class ConfigFile {
     private YamlConfiguration defaultcfg;
     private File configFile;
 
-    private ArrayList<ConfigNPC> NPCs;
+    private final ArrayList<ConfigNPC> NPCs;
 
     public ConfigFile(NPCFindMinigame plugin) {
         this.plugin = plugin;
@@ -76,7 +73,7 @@ public class ConfigFile {
     }
 
     public ConfigNPC getRandomNPC() {
-        int index = (int)(Math.random() * this.NPCs.size());
+        int index = (int) (Math.random() * this.NPCs.size());
         return this.NPCs.get(index);
     }
 }

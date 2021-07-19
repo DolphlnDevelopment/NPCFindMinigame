@@ -1,14 +1,16 @@
 package com.dolphln.npcfindminigame.database;
 
 import com.dolphln.npcfindminigame.NPCFindMinigame;
-
 import com.dolphln.npcfindminigame.database.models.PlayerDatabaseResult;
 import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.configuration.ConfigurationSection;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetProvider;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -18,7 +20,7 @@ public class Database {
 
     private HikariDataSource hikari;
 
-    private DatabaseCache databaseCache;
+    private final DatabaseCache databaseCache;
 
     public Database(NPCFindMinigame plugin) {
         this.plugin = plugin;

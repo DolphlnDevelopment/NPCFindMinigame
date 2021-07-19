@@ -12,7 +12,7 @@ public class DatabaseCache {
 
     private final NPCFindMinigame plugin;
 
-    private HashMap<UUID, PlayerDatabaseResult> databasePlayersCache;
+    private final HashMap<UUID, PlayerDatabaseResult> databasePlayersCache;
     private ArrayList<PlayerDatabaseResult> topPlayersCache;
 
     public DatabaseCache(NPCFindMinigame plugin) {
@@ -26,7 +26,7 @@ public class DatabaseCache {
             public void run() {
                 topPlayersCache = plugin.getDatabase().getTopWins(10);
             }
-        }.runTaskTimerAsynchronously(plugin, 15*20L, 30*20L);
+        }.runTaskTimerAsynchronously(plugin, 15 * 20L, 30 * 20L);
     }
 
     public void addPlayerCache(PlayerDatabaseResult playerDatabaseResult) {
