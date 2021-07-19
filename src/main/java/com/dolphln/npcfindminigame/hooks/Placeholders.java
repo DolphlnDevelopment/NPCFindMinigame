@@ -103,37 +103,40 @@ public class Placeholders extends PlaceholderExpansion {
      */
     @Override
     public String onPlaceholderRequest(Player player, String identifier){
-        if (player == null) {
-            return "";
-        }
+        try {
+            if (identifier.toLowerCase().startsWith("top_name_")) {
+                Integer top = null;
+                try {
+                    top = Integer.parseInt(identifier.toLowerCase().replaceAll("top_name_", ""));
+                } catch (Exception e) {
+                    return "";
+                }
 
-        if (identifier.toLowerCase().startsWith("top_name_")) {
-            Integer top = null;
-            try {
-                top = Integer.parseInt(identifier.toLowerCase().replaceAll("top_name_", ""));
-            } catch (Exception e) {
+                if (top > 10 || top < 1) return "";
+
+                return plugin.getDatabase().getTopWins().get(top-1).playerName();
+            } else if (identifier.toLowerCase().startsWith("top_wins_")) {
+                Integer top = null;
+                try {
+                    top = Integer.parseInt(identifier.toLowerCase().replaceAll("top_wins_", ""));
+                } catch (Exception e) {
+                    return "";
+                }
+
+                if (top > 10 || top < 1) return "";
+
+                return String.valueOf(plugin.getDatabase().getTopWins().get(top-1).wins());
+            } else if (identifier.equalsIgnoreCase("wins")) {
+                if (player == null) {
+                    return "";
+                }
+                return String.valueOf(plugin.getDatabase().getPlayer(player.getUniqueId()).wins());
+            } else if (identifier.equalsIgnoreCase("name")) {
+                return plugin.getNpcManager().getNPCName();
+            } else {
                 return "";
             }
-
-            if (top > 10 || top < 1) return "";
-
-            return plugin.getDatabase().getTopWins().get(top-1).playerName();
-        } else if (identifier.toLowerCase().startsWith("top_wins_")) {
-            Integer top = null;
-            try {
-                top = Integer.parseInt(identifier.toLowerCase().replaceAll("top_wins_", ""));
-            } catch (Exception e) {
-                return "";
-            }
-
-            if (top > 10 || top < 1) return "";
-
-            return String.valueOf(plugin.getDatabase().getTopWins().get(top-1).wins());
-        } else if (identifier.equalsIgnoreCase("wins")) {
-            return String.valueOf(plugin.getDatabase().getPlayer(player.getUniqueId()).wins());
-        } else if (identifier.equalsIgnoreCase("name")) {
-            return plugin.getNpcManager().getNPCName();
-        } else {
+        } catch (Exception e) {
             return "";
         }
     }
