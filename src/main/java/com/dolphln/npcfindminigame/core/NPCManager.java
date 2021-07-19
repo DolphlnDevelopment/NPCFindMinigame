@@ -166,6 +166,7 @@ public class NPCManager implements Listener {
 
         FireworkUtils.spawnFireworks(playingNPC.getLocation(), 1);
         npcPool.removeNPC(playingNPC.getEntityId());
+        this.playingNPC = null;
         Bukkit.getOnlinePlayers().forEach(p -> p.removePotionEffect(PotionEffectType.SPEED));
     }
 
@@ -175,7 +176,6 @@ public class NPCManager implements Listener {
         NPC npc = e.getNPC();
 
         if (this.playingNPC == null || this.playingNPC != npc) return;
-        this.playingNPC = null;
 
         npc.animation().queue(AnimationModifier.EntityAnimation.TAKE_DAMAGE);
         FireworkUtils.spawnFireworks(npc.getLocation(), 1);
@@ -192,6 +192,7 @@ public class NPCManager implements Listener {
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.subtitle")),
                 0, 4, 1);
         Bukkit.broadcastMessage(plugin.getConfigFile().getConfig().getString("winner_message").replaceAll("%player%", player.getDisplayName()));
+        plugin.runCommands(plugin.getConfigFile().getConfig().getStringList("winner_commands"), player);
     }
 
     public boolean isRunning() {
