@@ -21,7 +21,7 @@ public class NPCMinigameCommand extends BaseCommand {
     public NPCMinigameCommand(NPCFindMinigame plugin) {
         this.plugin = plugin;
 
-        this.helpMessage = MineDown.parse("&gold&Commands for &red&/npcm&gold&:\n\n&white&  - /npcm pos1\n  - /npcm pos2\n  - /npcm start");
+        this.helpMessage = MineDown.parse("&gray&Commands for &aqua&/npcm&gray&:\n&white&  - /npcm pos1\n  - /npcm pos2\n  - /npcm start");
     }
 
     @Subcommand("help")
@@ -42,7 +42,7 @@ public class NPCMinigameCommand extends BaseCommand {
         plugin.getDataFile().setLocation("hub.pos1", playerPos);
         plugin.getDataFile().save();
 
-        player.spigot().sendMessage(MineDown.parse("&green&You've set the position 1. It has also been saved for the future."));
+        player.spigot().sendMessage(MineDown.parse("&green&You've set the position 1."));
     }
 
     @Subcommand("pos2")
@@ -56,7 +56,7 @@ public class NPCMinigameCommand extends BaseCommand {
         plugin.getDataFile().setLocation("hub.pos2", playerPos);
         plugin.getDataFile().save();
 
-        player.spigot().sendMessage(MineDown.parse("&green&You've set the position 2. It has also been saved for the future."));
+        player.spigot().sendMessage(MineDown.parse("&green&You've set the position 2."));
     }
 
     @Subcommand("start")
@@ -68,7 +68,7 @@ public class NPCMinigameCommand extends BaseCommand {
         } else if (res == NPCManager.CreateGameResult.GAME_ALREADY_RUNNING) {
             sender.spigot().sendMessage(MineDown.parse("&red&Sorry, but a game already started."));
         } else if (res == NPCManager.CreateGameResult.SUCCESSFUL) {
-            sender.spigot().sendMessage(MineDown.parse("&green&The game countdown started successfully!"));
+            sender.spigot().sendMessage(MineDown.parse("&green&The game has been started. Enjoy it!"));
         }
     }
 
