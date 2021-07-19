@@ -46,6 +46,8 @@ public class NPCManager implements Listener {
                 .spawnDistance(80)
                 .build();
         this.playingNPC = null;
+
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     public CreateGameResult createMinigame() {
