@@ -18,7 +18,7 @@ public class JoinLeaveListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         if (plugin.getNpcManager().didItStart()) {
-            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 9999, plugin.getConfigFile().getConfig().getInt("speed_power"), true, false, true));
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, plugin.getConfigFile().getConfig().getInt("speed_power"), true, false, true));
         }
     }
 }

@@ -97,7 +97,7 @@ public class NPCManager implements Listener {
         Bukkit.getOnlinePlayers().forEach(player -> {
             player.sendTitle(title, subtitle, 1, 5, 1);
             player.removePotionEffect(PotionEffectType.SPEED);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 9999, speed_power, true, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, speed_power, true, false, false));
         });
 
         String message = ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.npc_hint")
