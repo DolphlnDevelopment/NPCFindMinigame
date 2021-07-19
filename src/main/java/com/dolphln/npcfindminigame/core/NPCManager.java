@@ -55,7 +55,8 @@ public class NPCManager implements Listener {
         int initialY = plugin.getConfigFile().getConfig().getInt("random_settings.y_level");
 
         BasicLocation npcLocation = null;
-        for (int i = 0; i < 100 && npcLocation == null; i++) {
+        int retries = plugin.getConfigFile().getConfig().getInt("retries");
+        for (int i = 0; i < retries && npcLocation == null; i++) {
             BasicLocation randomLoc = plugin.getDataFile().getHubCuboid().getRandomLocation();
             World world = Bukkit.getWorld(randomLoc.getWorldName());
 
