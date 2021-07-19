@@ -6,6 +6,7 @@ import com.dolphln.npcfindminigame.core.NPCManager;
 import com.dolphln.npcfindminigame.database.Database;
 import com.dolphln.npcfindminigame.files.ConfigFile;
 import com.dolphln.npcfindminigame.files.DataFile;
+import com.dolphln.npcfindminigame.hooks.Placeholders;
 import com.dolphln.npcfindminigame.listener.JoinLeaveListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -35,6 +36,10 @@ public final class NPCFindMinigame extends JavaPlugin {
         this.database = new Database(this);
 
         this.npcManager = new NPCManager(this);
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new Placeholders(this).register();
+        }
 
         this.commandManager = new PaperCommandManager(this);
         this.commandManager.registerCommand(new NPCMinigameCommand(this));

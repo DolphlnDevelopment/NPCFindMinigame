@@ -8,3 +8,5 @@ website: dolphln.com
 
 depend:
   - ProtocolLib
+softdepend:
+  - PlaceholderAPI
