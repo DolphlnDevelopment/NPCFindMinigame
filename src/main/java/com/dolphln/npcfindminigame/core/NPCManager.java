@@ -169,7 +169,7 @@ public class NPCManager implements Listener {
         return this.playingNPC != null;
     }
 
-    enum CreateGameResult {
+    public enum CreateGameResult {
         CANNOT_GET_LOCATION(),GAME_ALREADY_RUNNING(),SUCCESSFUL();
     }
 }
