@@ -78,7 +78,7 @@ public class NPCManager implements Listener {
         }
 
         this.time = 15;
-        Location finalNpcLocation = npcLocation.getLocation();
+        Location finalNpcLocation = npcLocation.getLocation().add(0.5, 0, 0.5);
         new BukkitRunnable() {
             @Override
             public void run() {
