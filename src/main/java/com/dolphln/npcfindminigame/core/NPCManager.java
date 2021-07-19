@@ -3,6 +3,7 @@ package com.dolphln.npcfindminigame.core;
 import com.dolphln.npcfindminigame.NPCFindMinigame;
 import com.dolphln.npcfindminigame.files.ConfigNPC;
 import com.dolphln.npcfindminigame.models.BasicLocation;
+import com.dolphln.npcfindminigame.utils.BlockUtils;
 import com.dolphln.npcfindminigame.utils.FireworkUtils;
 import com.github.juliarn.npc.NPC;
 import com.github.juliarn.npc.NPCPool;
@@ -62,7 +63,7 @@ public class NPCManager implements Listener {
 
             for (int y = initialY-radius; y < initialY+radius; y++) {
                 Block block = world.getBlockAt(randomLoc.getX(), y, randomLoc.getZ());
-                if (block.getType() == Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR && block.getLocation().add(0, -1, 0).getBlock().getType() != Material.AIR) {
+                if (block.getType() == Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR && BlockUtils.isBlockStatic(block.getLocation().add(0, -1, 0).getBlock().getType())) {
                     npcLocation = new BasicLocation(randomLoc.getX(), y, randomLoc.getZ(), randomLoc.getWorldName());
                     break;
                 }
