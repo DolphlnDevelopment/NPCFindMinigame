@@ -105,6 +105,22 @@ public class NPCManager implements Listener {
                 .replaceAll("%name%", npcName)
                 .replaceAll("%biome%", loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()).toString()));
         Bukkit.broadcastMessage(message);
+
+        this.gameTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (time == 0) {
+                    finishGame();
+                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.timeout_message")));
+                    cancel();
+                }
+                time--;
+
+                if (time % 5 == 0.0) {
+                    Bukkit.getOnlinePlayers().forEach(player -> player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, speed_power, true, false, false)));
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 20L);
     }
 
     /**
@@ -133,6 +149,14 @@ public class NPCManager implements Listener {
         return profile;
     }
 
+    public void finishGame() {
+        running = false;
+
+        FireworkUtils.spawnFireworks(playingNPC.getLocation(), 1);
+        npcPool.removeNPC(playingNPC.getEntityId());
+        Bukkit.getOnlinePlayers().forEach(p -> p.removePotionEffect(PotionEffectType.SPEED));
+    }
+
     @EventHandler
     public void handleNPCInteract(PlayerNPCInteractEvent e) {
         Player player = e.getPlayer();
@@ -147,10 +171,7 @@ public class NPCManager implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                running = false;
-
-                npcPool.removeNPC(npc.getEntityId());
-                FireworkUtils.spawnFireworks(npc.getLocation(), 1);
+                finishGame();
             }
         }.runTaskLater(plugin, 4L);
 
@@ -158,7 +179,6 @@ public class NPCManager implements Listener {
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.title")),
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.subtitle")),
                 0, 4, 1);
-        Bukkit.getOnlinePlayers().forEach(p -> p.removePotionEffect(PotionEffectType.SPEED));
         Bukkit.broadcastMessage(plugin.getConfigFile().getConfig().getString("winner_message").replaceAll("%player%", player.getDisplayName()));
     }
 

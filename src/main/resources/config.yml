@@ -43,3 +43,4 @@ message:
     title: "&7Congratulations"
     subtitle: "&8You won!"
   winner_message: "&7The user %player% won the minigame. Thank you for playing :D"
+  timeout_message: "&cThe time ran, and no one found the NPC. Better luck next time!"
