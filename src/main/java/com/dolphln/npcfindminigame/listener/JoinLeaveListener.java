@@ -8,13 +8,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class JoinLeaveListener implements Listener {
-
-    private final NPCFindMinigame plugin;
-
-    public JoinLeaveListener(NPCFindMinigame plugin) {
-        this.plugin = plugin;
-    }
+public record JoinLeaveListener(NPCFindMinigame plugin) implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
