@@ -21,7 +21,7 @@ public class NPCMinigameCommand extends BaseCommand {
     public NPCMinigameCommand(NPCFindMinigame plugin) {
         this.plugin = plugin;
 
-        this.helpMessage = MineDown.parse("&gold&Commands for &red&/npcm&gold%:\n\n&white&  - /npcm pos1\n  - /npcm pos2\n  - /npcm start");
+        this.helpMessage = MineDown.parse("&gold&Commands for &red&/npcm&gold&:\n\n&white&  - /npcm pos1\n  - /npcm pos2\n  - /npcm start");
     }
 
     @Subcommand("help")
