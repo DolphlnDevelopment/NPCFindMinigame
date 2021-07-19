@@ -10,7 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandAlias("npcminigame|npcm")
+@CommandAlias("npcminigame")
 @CommandPermission("npcminigame.use")
 public class NPCMinigameCommand extends BaseCommand {
 
