@@ -60,7 +60,7 @@ public class NPCManager implements Listener {
             BasicLocation randomLoc = plugin.getDataFile().getHubCuboid().getRandomLocation();
             World world = Bukkit.getWorld(randomLoc.getWorldName());
 
-            for (int y = initialY-radius; y < radius*2; y++) {
+            for (int y = initialY-radius; y < initialY+radius; y++) {
                 Block block = world.getBlockAt(randomLoc.getX(), y, randomLoc.getZ());
                 if (block.getType() == Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
                     npcLocation = new BasicLocation(randomLoc.getX(), y, randomLoc.getZ(), randomLoc.getWorldName());
@@ -69,7 +69,10 @@ public class NPCManager implements Listener {
             }
         }
 
-        if (npcLocation == null) return CreateGameResult.CANNOT_GET_LOCATION;
+        if (npcLocation == null) {
+            this.running = false;
+            return CreateGameResult.CANNOT_GET_LOCATION;
+        }
 
         this.time = 15;
         new BukkitRunnable() {
