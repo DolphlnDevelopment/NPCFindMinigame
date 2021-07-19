@@ -75,11 +75,12 @@ public class NPCManager implements Listener {
         }
 
         this.time = 15;
+        Location finalNpcLocation = npcLocation.getLocation();
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (time == 0) {
-                    startMinigame(null);
+                    startMinigame(finalNpcLocation);
                     cancel();
                 }
                 BaseComponent[] message = MineDown.parse(plugin.getConfigFile().getConfig().getString("message.npc_start_countdown").replaceAll("%time%", String.valueOf(time)));
