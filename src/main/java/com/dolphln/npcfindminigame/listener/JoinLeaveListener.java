@@ -24,7 +24,9 @@ public record JoinLeaveListener(NPCFindMinigame plugin) implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                plugin.getDatabase().addPlayer(e.getPlayer().getUniqueId(), e.getPlayer().getDisplayName());
+                if (plugin.isMysqlEnabled()) {
+                    plugin.getDatabase().addPlayer(e.getPlayer().getUniqueId(), e.getPlayer().getDisplayName());
+                }
             }
         }.runTaskAsynchronously(plugin);
     }
