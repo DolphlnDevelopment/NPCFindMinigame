@@ -33,13 +33,14 @@ public final class NPCFindMinigame extends JavaPlugin {
         this.configFile = new ConfigFile(this);
         this.dataFile = new DataFile(this);
 
-        this.database = new Database(this);
+        if (this.configFile.getConfig().getBoolean("mysql.enabled")) {
+            this.database = new Database(this);
+            if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+                new Placeholders(this).register();
+            }
+        }
 
         this.npcManager = new NPCManager(this);
-
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new Placeholders(this).register();
-        }
 
         this.commandManager = new PaperCommandManager(this);
         this.commandManager.registerCommand(new NPCMinigameCommand(this));
@@ -74,5 +75,9 @@ public final class NPCFindMinigame extends JavaPlugin {
 
     public NPCManager getNpcManager() {
         return npcManager;
+    }
+
+    public boolean isMysqlEnabled() {
+        return database != null;
     }
 }

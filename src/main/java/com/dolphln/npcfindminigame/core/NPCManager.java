@@ -182,12 +182,14 @@ public class NPCManager implements Listener {
         npc.animation().queue(AnimationModifier.EntityAnimation.TAKE_DAMAGE).send();
         FireworkUtils.spawnFireworks(npc.getLocation(), 1);
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                plugin.getDatabase().addWin(player.getUniqueId());
-            }
-        }.runTaskAsynchronously(plugin);
+        if (plugin.isMysqlEnabled()) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    plugin.getDatabase().addWin(player.getUniqueId());
+                }
+            }.runTaskAsynchronously(plugin);
+        }
 
         new BukkitRunnable() {
             @Override
