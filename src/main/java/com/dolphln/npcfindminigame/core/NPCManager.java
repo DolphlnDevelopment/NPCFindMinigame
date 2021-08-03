@@ -29,12 +29,10 @@ import java.util.UUID;
 public class NPCManager implements Listener {
 
     private final NPCFindMinigame plugin;
-
+    private final NPCPool npcPool;
     private boolean running;
     private BukkitTask gameTask;
     private Integer time;
-
-    private final NPCPool npcPool;
     private NPC playingNPC;
 
     public NPCManager(NPCFindMinigame plugin) {

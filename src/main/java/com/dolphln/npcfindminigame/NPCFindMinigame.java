@@ -26,6 +26,10 @@ public final class NPCFindMinigame extends JavaPlugin {
 
     private NPCManager npcManager;
 
+    public static NPCFindMinigame getInstance() {
+        return instance;
+    }
+
     @Override
     public void onEnable() {
         instance = this;
@@ -55,10 +59,6 @@ public final class NPCFindMinigame extends JavaPlugin {
 
     public void runCommands(List<String> commands, Player player) {
         commands.forEach(cmd -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd.replace("%player%", player.getDisplayName())));
-    }
-
-    public static NPCFindMinigame getInstance() {
-        return instance;
     }
 
     public ConfigFile getConfigFile() {

@@ -17,10 +17,8 @@ import java.util.UUID;
 public class Database {
 
     private final NPCFindMinigame plugin;
-
-    private HikariDataSource hikari;
-
     private final DatabaseCache databaseCache;
+    private HikariDataSource hikari;
 
     public Database(NPCFindMinigame plugin) {
         this.plugin = plugin;

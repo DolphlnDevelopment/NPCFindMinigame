@@ -13,12 +13,10 @@ import java.util.logging.Level;
 public class ConfigFile {
 
     private final NPCFindMinigame plugin;
-
-    private YamlConfiguration defaultcfg;
-    private File configFile;
-
     private final ArrayList<ConfigNPC> NPCs;
     private final ArrayList<Material> whitelistedMaterials;
+    private YamlConfiguration defaultcfg;
+    private File configFile;
 
     public ConfigFile(NPCFindMinigame plugin) {
         this.plugin = plugin;

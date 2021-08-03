@@ -79,7 +79,8 @@ public class NPCMinigameCommand extends BaseCommand {
     @Subcommand("reload")
     @CommandPermission("npcminigame.reload")
     public void onReload(CommandSender sender) {
-        if (plugin.getNpcManager().isRunning()) sender.sendMessage(ChatColor.RED + "You cannot reload when a minigame is running");
+        if (plugin.getNpcManager().isRunning())
+            sender.sendMessage(ChatColor.RED + "You cannot reload when a minigame is running");
 
         plugin.getConfigFile().reloadConfig();
         plugin.getDataFile().reloadConfig();
