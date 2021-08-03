@@ -6,6 +6,7 @@ import com.dolphln.npcfindminigame.NPCFindMinigame;
 import com.dolphln.npcfindminigame.core.NPCManager;
 import de.themoep.minedown.MineDown;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -73,6 +74,17 @@ public class NPCMinigameCommand extends BaseCommand {
         } else if (res == NPCManager.CreateGameResult.SUCCESSFUL) {
             sender.spigot().sendMessage(MineDown.parse("&green&The game has been started. Enjoy it!"));
         }
+    }
+
+    @Subcommand("reload")
+    @CommandPermission("npcminigame.reload")
+    public void onReload(CommandSender sender) {
+        if (plugin.getNpcManager().isRunning()) sender.sendMessage(ChatColor.RED + "You cannot reload when a minigame is running");
+
+        plugin.getConfigFile().reloadConfig();
+        plugin.getDataFile().reloadConfig();
+
+        sender.sendMessage(ChatColor.GREEN + "Reloaded config successfully!");
     }
 
     public Player playerCheck(CommandSender sender) {
