@@ -1,6 +1,9 @@
 package com.dolphln.npcfindminigame.files;
 
 import com.dolphln.npcfindminigame.NPCFindMinigame;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -15,11 +18,13 @@ public class ConfigFile {
     private File configFile;
 
     private final ArrayList<ConfigNPC> NPCs;
+    private final ArrayList<Material> whitelistedMaterials;
 
     public ConfigFile(NPCFindMinigame plugin) {
         this.plugin = plugin;
 
         this.NPCs = new ArrayList<>();
+        this.whitelistedMaterials = new ArrayList<>();
 
         setup();
     }
@@ -44,6 +49,7 @@ public class ConfigFile {
         plugin.getLogger().log(Level.FINE, "File config.yml loaded correctly.");
 
         this.loadNPCs();
+        this.loadMaterials();
     }
 
     public YamlConfiguration getConfig() {
@@ -55,9 +61,7 @@ public class ConfigFile {
     }
 
     public void reloadConfig() {
-        if (configFile.exists()) {
-            defaultcfg = YamlConfiguration.loadConfiguration(configFile);
-        }
+        setup();
     }
 
     private void loadNPCs() {
@@ -70,6 +74,22 @@ public class ConfigFile {
 
             this.NPCs.add(configNPC);
         }
+    }
+
+    private void loadMaterials() {
+        this.whitelistedMaterials.clear();
+        for (String rawMat : this.getConfig().getStringList("random_settings.whitelisted_blocks")) {
+            Material mat = Material.getMaterial(rawMat);
+            if (mat == null) {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&cThe material &e" + rawMat + " &cis invalid. Please, check it and reload the config."));
+            } else {
+                this.whitelistedMaterials.add(mat);
+            }
+        }
+    }
+
+    public boolean isMatValid(Material mat) {
+        return this.whitelistedMaterials.contains(mat);
     }
 
     public ConfigNPC getRandomNPC() {
