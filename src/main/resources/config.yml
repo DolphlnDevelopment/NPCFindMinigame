@@ -40,6 +40,13 @@ random_settings:
   # Radius to check validity of the randomness
   radius: 10
 
+  # This is the blocks where the NPC can spawn on.
+  # You can get the materials from https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+  whitelisted_blocks:
+    - GRASS_BLOCK
+    - GRAY_WOOL
+    - DIORITE
+
 winner_commands:
   - "/say %player% won. You can change this on the config."
 
