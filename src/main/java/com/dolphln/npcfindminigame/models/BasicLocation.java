@@ -6,11 +6,11 @@ import org.bukkit.Location;
 public class BasicLocation {
 
     private final int x;
-    private final int y;
+    private final double y;
     private final int z;
     private final String worldName;
 
-    public BasicLocation(int x, int y, int z, String worldName) {
+    public BasicLocation(int x, double y, int z, String worldName) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -28,7 +28,7 @@ public class BasicLocation {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 

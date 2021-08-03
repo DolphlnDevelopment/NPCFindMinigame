@@ -19,7 +19,7 @@ public class BasicCuboid {
     private int maxZ;
 
     public BasicCuboid(BasicLocation loc1, BasicLocation loc2, String world) {
-        this(world, loc1.getX(), loc1.getY(), loc1.getZ(), loc2.getX(), loc2.getY(), loc2.getZ());
+        this(world, loc1.getX(), (int) loc1.getY(), loc1.getZ(), loc2.getX(), (int) loc2.getY(), loc2.getZ());
     }
 
     public BasicCuboid(String world, int x1, int y1, int z1, int x2, int y2, int z2) {
@@ -98,7 +98,7 @@ public class BasicCuboid {
     }
 
     public boolean contains(BasicLocation location) {
-        return contains(location.getWorldName(), location.getX(), location.getY(), location.getZ());
+        return contains(location.getWorldName(), location.getX(), (int) location.getY(), location.getZ());
     }
 
     public boolean contains(String worldName, int x, int y, int z) {
