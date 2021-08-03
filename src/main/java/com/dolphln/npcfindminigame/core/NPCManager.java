@@ -66,7 +66,8 @@ public class NPCManager implements Listener {
             for (int y = initialY - radius; y < initialY + radius; y++) {
                 Block block = world.getBlockAt(randomLoc.getX(), y, randomLoc.getZ());
                 if (block.getType() == Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR && BlockUtils.isBlockStatic(block.getLocation().add(0, -1, 0).getBlock().getType(), false)) {
-                    npcLocation = new BasicLocation(randomLoc.getX(), randomLoc.getLocation().getBlock().getType().toString().toLowerCase().contains("slab") ? y-0.5 : y, randomLoc.getZ(), randomLoc.getWorldName());
+                    npcLocation = new BasicLocation(randomLoc.getX(), randomLoc.getLocation().getBlock().getType().toString().toLowerCase().contains("slab") ? y - 0.5 : y, randomLoc.getZ(), randomLoc.getWorldName());
+                    System.out.println("The npc is spawning at x:" + npcLocation.getX() + " y:" + npcLocation.getY() + " z:" + npcLocation.getZ());
                     break;
                 }
             }
