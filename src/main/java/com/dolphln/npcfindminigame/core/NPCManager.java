@@ -107,7 +107,7 @@ public class NPCManager implements Listener {
         String title = ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.npc_start_title.title"));
         String subtitle = ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.npc_start_title.subtitle"));
         Bukkit.getOnlinePlayers().forEach(player -> {
-            player.sendTitle(title, subtitle, 1, 5, 1);
+            player.sendTitle(title, subtitle, 1*20, 5*20, 1*20);
             player.removePotionEffect(PotionEffectType.SPEED);
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, speed_power, true, false, false));
         });
@@ -200,7 +200,7 @@ public class NPCManager implements Listener {
         player.sendTitle(
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.title")),
                 ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_title.subtitle")),
-                0, 4, 1);
+                0, 4*20, 1*20);
         Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfigFile().getConfig().getString("message.winner_message").replaceAll("%player%", player.getDisplayName())));
         plugin.runCommands(plugin.getConfigFile().getConfig().getStringList("winner_commands"), player);
     }
